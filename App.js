@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, ScrollView, SafeAreaView, TouchableOpacity, StatusBar } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, SafeAreaView, TouchableOpacity, StatusBar, Image } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Constants from 'expo-constants';
 
@@ -124,16 +124,26 @@ export default function App() {
       <ScrollView style={styles.contentContainer}>
         {datosProcesados.map(item => (
           <TouchableOpacity key={item.id} style={styles.card} onPress={() => toggleCaptura(item.id)}>
+
+            {/* Renderizado condicional de la imagen */}
+            {item.imagen ? (
+              <Image source={{ uri: item.imagen }} style={styles.creatureImage} />
+            ) : (
+              <View style={styles.placeholderImage}>
+                <Text style={styles.placeholderText}>📷</Text>
+              </View>
+            )}
+
             <View style={styles.info}>
               <View style={styles.titleRow}>
                 <Text style={styles.name}>{item.nombre}</Text>
-                {/* 3. Indicador condicional si la especie se va pronto y aún no la capturan */}
                 {item.seVa && !item.obtenido && (
                   <Text style={styles.alertText}> ⚠️ ¡Se va este mes!</Text>
                 )}
               </View>
               <Text style={styles.details}>{item.ubicacion} • {item.horario} • {item.sombra}</Text>
             </View>
+
             <View style={[styles.status, item.obtenido ? styles.collected : styles.missing]}>
               <Text style={styles.statusText}>{item.obtenido ? '✔' : '✖'}</Text>
             </View>
@@ -177,5 +187,27 @@ const styles = StyleSheet.create({
   collected: { backgroundColor: '#dfffb5' },
   missing: { backgroundColor: '#ffcdd2' },
   footer: { flexDirection: 'row', padding: 15, backgroundColor: '#fff', borderTopWidth: 1, borderColor: '#eee' },
-  footerTab: { flex: 1, alignItems: 'center' }
+  
+  // 👇 AQUÍ ESTABA EL ERROR: Faltaba la coma al final de esta línea
+  footerTab: { flex: 1, alignItems: 'center' }, 
+  
+  creatureImage: {
+    width: 50,
+    height: 50,
+    borderRadius: 10,
+    marginRight: 15,
+    backgroundColor: '#f0f0f0', 
+  },
+  placeholderImage: {
+    width: 50,
+    height: 50,
+    borderRadius: 10,
+    marginRight: 15,
+    backgroundColor: '#e0e0e0',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  placeholderText: {
+    fontSize: 20,
+  },
 });
