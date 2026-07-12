@@ -15,6 +15,7 @@ export default function App() {
   const [bichos, setBichos] = useState([]);
   const [submarina, setSubmarina] = useState([]);
   const [cargando, setCargando] = useState(true);
+  const [idExpandido, setIdExpandido] = useState(null);
 
   // Cálculos de fecha para la lógica de prioridad
   const mesActual = new Date().getMonth() + 1;
@@ -23,9 +24,10 @@ export default function App() {
   useEffect(() => {
     const cargarDatos = async () => {
       try {
-        const cPeces = await AsyncStorage.getItem('@tracker_peces');
-        const cBichos = await AsyncStorage.getItem('@tracker_bichos');
-        const cSub = await AsyncStorage.getItem('@tracker_submarina_v3');
+        // 1. Actualizamos los nombres de las llaves aquí
+        const cPeces = await AsyncStorage.getItem('@tracker_peces_v3');
+        const cBichos = await AsyncStorage.getItem('@tracker_bichos_v3');
+        const cSub = await AsyncStorage.getItem('@tracker_submarina_v5');
         const cHemisferio = await AsyncStorage.getItem('@tracker_hemisferio');
 
         setPeces(cPeces ? JSON.parse(cPeces) : pecesDatos.map(p => ({ ...p, obtenido: false })));
@@ -39,9 +41,9 @@ export default function App() {
 
   useEffect(() => {
     if (!cargando) {
-      AsyncStorage.setItem('@tracker_peces', JSON.stringify(peces));
-      AsyncStorage.setItem('@tracker_bichos', JSON.stringify(bichos));
-      AsyncStorage.setItem('@tracker_submarina_v3', JSON.stringify(submarina));
+      AsyncStorage.setItem('@tracker_peces_v3', JSON.stringify(peces));
+      AsyncStorage.setItem('@tracker_bichos_v3', JSON.stringify(bichos));
+      AsyncStorage.setItem('@tracker_submarina_v5', JSON.stringify(submarina));
       AsyncStorage.setItem('@tracker_hemisferio', hemisferio);
     }
   }, [peces, bichos, submarina, hemisferio]);
@@ -122,33 +124,59 @@ export default function App() {
       </View>
 
       <ScrollView style={styles.contentContainer}>
-        {datosProcesados.map(item => (
-          <TouchableOpacity key={item.id} style={styles.card} onPress={() => toggleCaptura(item.id)}>
+        {datosProcesados.map(item => {
+          const estaExpandido = idExpandido === item.id;
 
-            {/* Renderizado condicional de la imagen */}
-            {item.imagen ? (
-              <Image source={{ uri: item.imagen }} style={styles.creatureImage} />
-            ) : (
-              <View style={styles.placeholderImage}>
-                <Text style={styles.placeholderText}>📷</Text>
+          return (
+            <View key={item.id} style={styles.tarjeta}>
+              {/* 1. Fila Principal (Siempre visible) */}
+              <View style={styles.filaPrincipal}>
+
+                {/* Nombre tocable para abrir/cerrar */}
+                <TouchableOpacity
+                  style={styles.areaNombre}
+                  onPress={() => setIdExpandido(estaExpandido ? null : item.id)}
+                >
+                  <View style={styles.titleRow}>
+                    <Text style={styles.textoNombre}>
+                      {item.nombre}
+                    </Text>
+                    {item.seVa && !item.obtenido && (
+                      <Text style={styles.alertText}> ⚠️ ¡Se va este mes!</Text>
+                    )}
+                  </View>
+                </TouchableOpacity>
+
+                {/* Botón de captura (tu diseño original) */}
+                <TouchableOpacity
+                  style={[styles.status, item.obtenido ? styles.collected : styles.missing]}
+                  onPress={() => toggleCaptura(item.id)}
+                >
+                  <Text style={styles.statusText}>{item.obtenido ? '✔' : '✖'}</Text>
+                </TouchableOpacity>
               </View>
-            )}
 
-            <View style={styles.info}>
-              <View style={styles.titleRow}>
-                <Text style={styles.name}>{item.nombre}</Text>
-                {item.seVa && !item.obtenido && (
-                  <Text style={styles.alertText}> ⚠️ ¡Se va este mes!</Text>
-                )}
-              </View>
-              <Text style={styles.details}>{item.ubicacion} • {item.horario} • {item.sombra}</Text>
-            </View>
+              {/* 2. Zona Desplegable (Solo visible si le diste clic) */}
+              {estaExpandido && (
+                <View style={styles.detalles}>
+                  {item.imagen ? (
+                    <Image
+                      source={{ uri: item.imagen }}
+                      style={styles.imagenTarjeta}
+                      resizeMode="contain"
+                    />
+                  ) : (
+                    <View style={styles.cajaGris}>
+                      <Text style={styles.emojiCamara}>📷</Text>
+                    </View>
+                  )}
 
-            <View style={[styles.status, item.obtenido ? styles.collected : styles.missing]}>
-              <Text style={styles.statusText}>{item.obtenido ? '✔' : '✖'}</Text>
+                  <Text style={styles.textoInfo}>📍 {item.ubicacion} • {item.horario} • {item.sombra}</Text>
+                </View>
+              )}
             </View>
-          </TouchableOpacity>
-        ))}
+          );
+        })}
       </ScrollView>
 
       <View style={styles.footer}>
@@ -177,37 +205,69 @@ const styles = StyleSheet.create({
   textActive: { color: '#000', fontWeight: 'bold' },
   textInactive: { color: '#666' },
   contentContainer: { padding: 15 },
-  card: { backgroundColor: '#fff', padding: 15, borderRadius: 15, marginBottom: 10, flexDirection: 'row', alignItems: 'center', elevation: 3, shadowColor: "#000", shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.1 },
-  info: { flex: 1 },
   titleRow: { flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap' },
-  name: { fontSize: 16, fontWeight: 'bold' },
   alertText: { fontSize: 12, color: '#D32F2F', fontWeight: 'bold', marginLeft: 5 },
-  details: { fontSize: 13, color: '#555', marginTop: 3 },
   status: { padding: 10, borderRadius: 20 },
   collected: { backgroundColor: '#dfffb5' },
   missing: { backgroundColor: '#ffcdd2' },
   footer: { flexDirection: 'row', padding: 15, backgroundColor: '#fff', borderTopWidth: 1, borderColor: '#eee' },
-  
+
   // 👇 AQUÍ ESTABA EL ERROR: Faltaba la coma al final de esta línea
-  footerTab: { flex: 1, alignItems: 'center' }, 
-  
-  creatureImage: {
-    width: 50,
-    height: 50,
-    borderRadius: 10,
-    marginRight: 15,
-    backgroundColor: '#f0f0f0', 
+  footerTab: { flex: 1, alignItems: 'center' },
+
+  tarjeta: {
+    backgroundColor: '#fff',
+    borderRadius: 15,
+    marginBottom: 10,
+    elevation: 3,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    overflow: 'hidden'
   },
-  placeholderImage: {
-    width: 50,
-    height: 50,
-    borderRadius: 10,
-    marginRight: 15,
-    backgroundColor: '#e0e0e0',
+  filaPrincipal: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     alignItems: 'center',
+    padding: 15,
+  },
+  areaNombre: {
+    flex: 1,
+    paddingRight: 10,
+  },
+  textoNombre: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#444',
+  },
+  detalles: {
+    borderTopWidth: 1,
+    borderColor: '#eee',
+    padding: 15,
+    alignItems: 'center',
+    backgroundColor: '#fafafa'
+  },
+  imagenTarjeta: {
+    width: '100%',
+    height: 250, // Más alto para que luzcan las fotos que subiste
+    marginBottom: 10,
+  },
+  cajaGris: {
+    width: '100%',
+    height: 200,
+    backgroundColor: '#e0e0e0',
     justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 10,
+    marginBottom: 10,
   },
-  placeholderText: {
-    fontSize: 20,
+  emojiCamara: {
+    fontSize: 40,
   },
+  textoInfo: {
+    fontSize: 14,
+    color: '#555',
+    textAlign: 'center',
+    fontWeight: '500'
+  }
 });
