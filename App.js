@@ -25,9 +25,9 @@ export default function App() {
     const cargarDatos = async () => {
       try {
         // 1. Actualizamos los nombres de las llaves aquí
-        const cPeces = await AsyncStorage.getItem('@tracker_peces_v3');
-        const cBichos = await AsyncStorage.getItem('@tracker_bichos_v3');
-        const cSub = await AsyncStorage.getItem('@tracker_submarina_v5');
+        const cPeces = await AsyncStorage.getItem('@tracker_peces_v4');
+        const cBichos = await AsyncStorage.getItem('@tracker_bichos_v4');
+        const cSub = await AsyncStorage.getItem('@tracker_submarina_v6');
         const cHemisferio = await AsyncStorage.getItem('@tracker_hemisferio');
 
         setPeces(cPeces ? JSON.parse(cPeces) : pecesDatos.map(p => ({ ...p, obtenido: false })));
@@ -41,9 +41,9 @@ export default function App() {
 
   useEffect(() => {
     if (!cargando) {
-      AsyncStorage.setItem('@tracker_peces_v3', JSON.stringify(peces));
-      AsyncStorage.setItem('@tracker_bichos_v3', JSON.stringify(bichos));
-      AsyncStorage.setItem('@tracker_submarina_v5', JSON.stringify(submarina));
+      AsyncStorage.setItem('@tracker_peces_v4', JSON.stringify(peces));
+      AsyncStorage.setItem('@tracker_bichos_v4', JSON.stringify(bichos));
+      AsyncStorage.setItem('@tracker_submarina_v6', JSON.stringify(submarina));
       AsyncStorage.setItem('@tracker_hemisferio', hemisferio);
     }
   }, [peces, bichos, submarina, hemisferio]);
