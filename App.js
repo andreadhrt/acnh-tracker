@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, ScrollView, SafeAreaView, TouchableOpacity, StatusBar, Image } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, SafeAreaView, TouchableOpacity, StatusBar, Image, TextInput } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Constants from 'expo-constants';
 
@@ -12,6 +12,7 @@ export default function App() {
   const [pestañaActual, setPestañaActual] = useState('peces');
   const [filtroSeleccionado, setFiltroSeleccionado] = useState('todos');
   const [hemisferio, setHemisferio] = useState('norte');
+  const [busqueda, setBusqueda] = useState('');
   const [peces, setPeces] = useState([]);
   const [bichos, setBichos] = useState([]);
   const [submarina, setSubmarina] = useState([]);
@@ -86,6 +87,11 @@ export default function App() {
 
     return { ...item, enTemporada, seVa };
   }).filter(item => {
+
+    // Filtro de búsqueda por texto
+    const coincideBusqueda = item.nombre.toLowerCase().includes(busqueda.toLowerCase());
+    if (!coincideBusqueda) return false;
+
     if (filtroSeleccionado === 'disponibles') return !item.obtenido && item.enTemporada;
     if (filtroSeleccionado === 'faltantes') return !item.obtenido;
     if (filtroSeleccionado === 'obtenidos') return item.obtenido;
@@ -108,6 +114,15 @@ export default function App() {
       {/* Header modificado con selector y barra de progreso */}
       <View style={styles.header}>
         <Text style={styles.headerTitle}>ACNH Tracker</Text>
+
+        {/* Barra de búsqueda */}
+        <TextInput
+          style={styles.searchInput}
+          placeholder="Buscar criatura u obra..."
+          placeholderTextColor="#888"
+          value={busqueda}
+          onChangeText={setBusqueda}
+        />
 
         {pestañaActual !== 'arte' && (
           <TouchableOpacity
@@ -206,10 +221,33 @@ export default function App() {
       </ScrollView>
 
       <View style={styles.footer}>
-        <TouchableOpacity style={styles.footerTab} onPress={() => setPestañaActual('peces')}><Text>🐟 Peces</Text></TouchableOpacity>
-        <TouchableOpacity style={styles.footerTab} onPress={() => setPestañaActual('bichos')}><Text>🦋 Bichos</Text></TouchableOpacity>
-        <TouchableOpacity style={styles.footerTab} onPress={() => setPestañaActual('submarina')}><Text>🤿 Buceo</Text></TouchableOpacity>
-        <TouchableOpacity style={styles.footerTab} onPress={() => setPestañaActual('arte')}><Text>🏛️ Arte</Text></TouchableOpacity>
+        <TouchableOpacity 
+          style={[styles.footerTab, pestañaActual === 'peces' && styles.footerTabActive]} 
+          onPress={() => setPestañaActual('peces')}
+        >
+          <Text style={[styles.footerText, pestañaActual === 'peces' && styles.footerTextActive]}>🐟 Peces</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity 
+          style={[styles.footerTab, pestañaActual === 'bichos' && styles.footerTabActive]} 
+          onPress={() => setPestañaActual('bichos')}
+        >
+          <Text style={[styles.footerText, pestañaActual === 'bichos' && styles.footerTextActive]}>🦋 Bichos</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity 
+          style={[styles.footerTab, pestañaActual === 'submarina' && styles.footerTabActive]} 
+          onPress={() => setPestañaActual('submarina')}
+        >
+          <Text style={[styles.footerText, pestañaActual === 'submarina' && styles.footerTextActive]}>🤿 Buceo</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity 
+          style={[styles.footerTab, pestañaActual === 'arte' && styles.footerTabActive]} 
+          onPress={() => setPestañaActual('arte')}
+        >
+          <Text style={[styles.footerText, pestañaActual === 'arte' && styles.footerTextActive]}>🏛️ Arte</Text>
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
@@ -239,8 +277,25 @@ const styles = StyleSheet.create({
   missing: { backgroundColor: '#ffcdd2' },
   footer: { flexDirection: 'row', padding: 15, backgroundColor: '#fff', borderTopWidth: 1, borderColor: '#eee' },
 
-  // 👇 AQUÍ ESTABA EL ERROR: Faltaba la coma al final de esta línea
-  footerTab: { flex: 1, alignItems: 'center' },
+  footerTab: { 
+    flex: 1, 
+    alignItems: 'center', 
+    paddingVertical: 8,
+    borderRadius: 10,
+    marginHorizontal: 2,
+  },
+  footerTabActive: { 
+    backgroundColor: '#ffb2a6', // O el color de acento que prefieras
+  },
+  footerText: { 
+    fontSize: 12, 
+    color: '#666',
+    fontWeight: '500',
+  },
+  footerTextActive: { 
+    color: '#000', 
+    fontWeight: 'bold', 
+  },
 
   tarjeta: {
     backgroundColor: '#fff',
@@ -296,5 +351,15 @@ const styles = StyleSheet.create({
     color: '#555',
     textAlign: 'center',
     fontWeight: '500'
+  },
+  searchInput: {
+    width: '100%',
+    backgroundColor: '#fff',
+    paddingHorizontal: 15,
+    paddingVertical: 8,
+    borderRadius: 15,
+    fontSize: 14,
+    marginBottom: 12,
+    color: '#333',
   }
 });
