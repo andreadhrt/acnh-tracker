@@ -1,0 +1,346 @@
+[
+  {
+    "id": 1,
+    "nombre": "Bodegón",
+    "tipo": "Cuadro",
+    "obra_real": "Manzanas y naranjas",
+    "autor": "Paul Cézanne",
+    "imagen": "https://raw.githubusercontent.com/andreadhrt/acnh-tracker/master/images/arte/bodegon.jpg"
+  },
+  {
+    "id": 2,
+    "nombre": "Cuadro alegórico",
+    "tipo": "Cuadro",
+    "obra_real": "El nacimiento de Venus",
+    "autor": "Sandro Botticelli",
+    "imagen": "https://raw.githubusercontent.com/andreadhrt/acnh-tracker/master/images/arte/cuadro_alegorico.jpg"
+  },
+  {
+    "id": 3,
+    "nombre": "Cuadro anatómico",
+    "tipo": "Cuadro",
+    "obra_real": "Hombre de Vitruvio",
+    "autor": "Leonardo da Vinci",
+    "imagen": "https://raw.githubusercontent.com/andreadhrt/acnh-tracker/master/images/arte/cuadro_anatomico.jpg"
+  },
+  {
+    "id": 4,
+    "nombre": "Cuadro clásico",
+    "tipo": "Cuadro",
+    "obra_real": "La maja vestida",
+    "autor": "Francisco de Goya",
+    "imagen": "https://raw.githubusercontent.com/andreadhrt/acnh-tracker/master/images/arte/cuadro_clasico.jpg"
+  },
+  {
+    "id": 5,
+    "nombre": "Cuadro dama",
+    "tipo": "Cuadro",
+    "obra_real": "Un bar del Folies-Bergère",
+    "autor": "Édouard Manet",
+    "imagen": "https://raw.githubusercontent.com/andreadhrt/acnh-tracker/master/images/arte/cuadro_dama.jpg"
+  },
+  {
+    "id": 6,
+    "nombre": "Cuadro detallado",
+    "tipo": "Cuadro",
+    "obra_real": "Ajisai Sōkeizu",
+    "autor": "Itō Jakuchū",
+    "imagen": "https://raw.githubusercontent.com/andreadhrt/acnh-tracker/master/images/arte/cuadro_detallado.jpg"
+  },
+  {
+    "id": 7,
+    "nombre": "Cuadro español",
+    "tipo": "Cuadro",
+    "obra_real": "Las meninas",
+    "autor": "Diego Velázquez",
+    "imagen": "https://raw.githubusercontent.com/andreadhrt/acnh-tracker/master/images/arte/cuadro_espanol.jpg"
+  },
+  {
+    "id": 8,
+    "nombre": "Cuadro flores",
+    "tipo": "Cuadro",
+    "obra_real": "Girasoles",
+    "autor": "Vincent van Gogh",
+    "imagen": "https://raw.githubusercontent.com/andreadhrt/acnh-tracker/master/images/arte/cuadro_flores.jpg"
+  },
+  {
+    "id": 9,
+    "nombre": "Cuadro holandés",
+    "tipo": "Cuadro",
+    "obra_real": "La ronda de noche",
+    "autor": "Rembrandt van Rijn",
+    "imagen": "https://raw.githubusercontent.com/andreadhrt/acnh-tracker/master/images/arte/cuadro_holandes.jpg"
+  },
+  {
+    "id": 10,
+    "nombre": "Cuadro invernal",
+    "tipo": "Cuadro",
+    "obra_real": "Los cazadores en la nieve",
+    "autor": "Pieter Brueghel el Viejo",
+    "imagen": "https://raw.githubusercontent.com/andreadhrt/acnh-tracker/master/images/arte/cuadro_invernal.jpg"
+  },
+  {
+    "id": 11,
+    "nombre": "Cuadro japonés",
+    "tipo": "Cuadro",
+    "obra_real": "Otani Oniji III como Yakko Edobei",
+    "autor": "Tōshūsai Sharaku",
+    "imagen": "https://raw.githubusercontent.com/andreadhrt/acnh-tracker/master/images/arte/cuadro_japones.jpg"
+  },
+  {
+    "id": 12,
+    "nombre": "Cuadro literario",
+    "tipo": "Cuadro",
+    "obra_real": "Ofelia",
+    "autor": "John Everett Millais",
+    "imagen": "https://raw.githubusercontent.com/andreadhrt/acnh-tracker/master/images/arte/cuadro_literario.jpg"
+  },
+  {
+    "id": 13,
+    "nombre": "Cuadro naturaleza (dcha.)",
+    "tipo": "Cuadro",
+    "obra_real": "Biombo de Fūjin y Raijin (derecha)",
+    "autor": "Tawaraya Sōtatsu",
+    "imagen": "https://raw.githubusercontent.com/andreadhrt/acnh-tracker/master/images/arte/cuadro_naturaleza_d.jpg"
+  },
+  {
+    "id": 14,
+    "nombre": "Cuadro naturaleza (izda.)",
+    "tipo": "Cuadro",
+    "obra_real": "Biombo de Fūjin y Raijin (izquierda)",
+    "autor": "Tawaraya Sōtatsu",
+    "imagen": "https://raw.githubusercontent.com/andreadhrt/acnh-tracker/master/images/arte/cuadro_naturaleza_i.jpg"
+  },
+  {
+    "id": 15,
+    "nombre": "Cuadro ola",
+    "tipo": "Cuadro",
+    "obra_real": "Treinta y seis vistas del monte Fuji",
+    "autor": "Katsushika Hokusai",
+    "imagen": "https://raw.githubusercontent.com/andreadhrt/acnh-tracker/master/images/arte/cuadro_ola.jpg"
+  },
+  {
+    "id": 16,
+    "nombre": "Cuadro orgánico",
+    "tipo": "Cuadro",
+    "obra_real": "Verano",
+    "autor": "Giuseppe Arcimboldo",
+    "imagen": "https://raw.githubusercontent.com/andreadhrt/acnh-tracker/master/images/arte/cuadro_organico.jpg"
+  },
+  {
+    "id": 17,
+    "nombre": "Cuadro romántico",
+    "tipo": "Cuadro",
+    "obra_real": "La Libertad guiando al pueblo",
+    "autor": "Eugène Delacroix",
+    "imagen": "https://raw.githubusercontent.com/andreadhrt/acnh-tracker/master/images/arte/cuadro_romantico.jpg"
+  },
+  {
+    "id": 18,
+    "nombre": "Cuadro segadoras",
+    "tipo": "Cuadro",
+    "obra_real": "Las espigadoras",
+    "autor": "Jean-François Millet",
+    "imagen": "https://raw.githubusercontent.com/andreadhrt/acnh-tracker/master/images/arte/cuadro_segadoras.jpg"
+  },
+  {
+    "id": 19,
+    "nombre": "Cuadro tenebroso",
+    "tipo": "Cuadro",
+    "obra_real": "La isla de los muertos",
+    "autor": "Arnold Böcklin",
+    "imagen": "https://raw.githubusercontent.com/andreadhrt/acnh-tracker/master/images/arte/cuadro_tenebroso.jpg"
+  },
+  {
+    "id": 20,
+    "nombre": "Cuadro vespertino",
+    "tipo": "Cuadro",
+    "obra_real": "El Temerario",
+    "autor": "Joseph Mallord William Turner",
+    "imagen": "https://raw.githubusercontent.com/andreadhrt/acnh-tracker/master/images/arte/cuadro_vespertino.jpg"
+  },
+  {
+    "id": 21,
+    "nombre": "Paisaje estrellado",
+    "tipo": "Cuadro",
+    "obra_real": "La noche estrellada",
+    "autor": "Vincent van Gogh",
+    "imagen": "https://raw.githubusercontent.com/andreadhrt/acnh-tracker/master/images/arte/paisaje_estrellado.jpg"
+  },
+  {
+    "id": 22,
+    "nombre": "Paisaje francés",
+    "tipo": "Cuadro",
+    "obra_real": "Tarde de domingo",
+    "autor": "Georges Seurat",
+    "imagen": "https://raw.githubusercontent.com/andreadhrt/acnh-tracker/master/images/arte/paisaje_frances.jpg"
+  },
+  {
+    "id": 23,
+    "nombre": "Retrato heroico",
+    "tipo": "Cuadro",
+    "obra_real": "El niño azul",
+    "autor": "Thomas Gainsborough",
+    "imagen": "https://raw.githubusercontent.com/andreadhrt/acnh-tracker/master/images/arte/retrato_heroico.jpg"
+  },
+  {
+    "id": 24,
+    "nombre": "Retrato holandés",
+    "tipo": "Cuadro",
+    "obra_real": "La lechera",
+    "autor": "Johannes Vermeer",
+    "imagen": "https://raw.githubusercontent.com/andreadhrt/acnh-tracker/master/images/arte/retrato_holandes.jpg"
+  },
+  {
+    "id": 25,
+    "nombre": "Retrato italiano",
+    "tipo": "Cuadro",
+    "obra_real": "La Mona Lisa",
+    "autor": "Leonardo da Vinci",
+    "imagen": "https://raw.githubusercontent.com/andreadhrt/acnh-tracker/master/images/arte/retrato_italiano.jpg"
+  },
+  {
+    "id": 26,
+    "nombre": "Retrato joven",
+    "tipo": "Cuadro",
+    "obra_real": "El sembrador",
+    "autor": "Jean-François Millet",
+    "imagen": "https://raw.githubusercontent.com/andreadhrt/acnh-tracker/master/images/arte/retrato_joven.jpg"
+  },
+  {
+    "id": 27,
+    "nombre": "Retrato músico",
+    "tipo": "Cuadro",
+    "obra_real": "El pífano",
+    "autor": "Édouard Manet",
+    "imagen": "https://raw.githubusercontent.com/andreadhrt/acnh-tracker/master/images/arte/retrato_musico.jpg"
+  },
+  {
+    "id": 28,
+    "nombre": "Retrato oriental",
+    "tipo": "Cuadro",
+    "obra_real": "Mujer mirando hacia atrás",
+    "autor": "Hishikawa Moronobu",
+    "imagen": "https://raw.githubusercontent.com/andreadhrt/acnh-tracker/master/images/arte/retrato_oriental.jpg"
+  },
+  {
+    "id": 29,
+    "nombre": "Retrato perla",
+    "tipo": "Cuadro",
+    "obra_real": "La joven de la perla",
+    "autor": "Johannes Vermeer",
+    "imagen": "https://raw.githubusercontent.com/andreadhrt/acnh-tracker/master/images/arte/retrato_perla.jpg"
+  },
+  {
+    "id": 30,
+    "nombre": "Retrato regio",
+    "tipo": "Cuadro",
+    "obra_real": "La dama del armiño",
+    "autor": "Leonardo da Vinci",
+    "imagen": "https://raw.githubusercontent.com/andreadhrt/acnh-tracker/master/images/arte/retrato_regio.jpg"
+  },
+  {
+    "id": 31,
+    "nombre": "Busto antiguo",
+    "tipo": "Escultura",
+    "obra_real": "Busto de Nefertiti",
+    "autor": "Thutmose",
+    "imagen": "https://raw.githubusercontent.com/andreadhrt/acnh-tracker/master/images/arte/busto_antiguo.jpg"
+  },
+  {
+    "id": 32,
+    "nombre": "Cabeza colosal",
+    "tipo": "Escultura",
+    "obra_real": "Cabeza colosal olmeca",
+    "autor": "Desconocido",
+    "imagen": "https://raw.githubusercontent.com/andreadhrt/acnh-tracker/master/images/arte/cabeza_colosal.jpg"
+  },
+  {
+    "id": 33,
+    "nombre": "Estatua alada",
+    "tipo": "Escultura",
+    "obra_real": "Victoria de Samotracia",
+    "autor": "Desconocido",
+    "imagen": "https://raw.githubusercontent.com/andreadhrt/acnh-tracker/master/images/arte/estatua_alada.jpg"
+  },
+  {
+    "id": 34,
+    "nombre": "Estatua atlética",
+    "tipo": "Escultura",
+    "obra_real": "Discóbolo",
+    "autor": "Mirón de Eléuteras",
+    "imagen": "https://raw.githubusercontent.com/andreadhrt/acnh-tracker/master/images/arte/estatua_atletica.jpg"
+  },
+  {
+    "id": 35,
+    "nombre": "Estatua femenina",
+    "tipo": "Escultura",
+    "obra_real": "Venus de Milo",
+    "autor": "Desconocido",
+    "imagen": "https://raw.githubusercontent.com/andreadhrt/acnh-tracker/master/images/arte/estatua_femenina.jpg"
+  },
+  {
+    "id": 36,
+    "nombre": "Estatua guerrera",
+    "tipo": "Escultura",
+    "obra_real": "Guerrero de terracota",
+    "autor": "Desconocido",
+    "imagen": "https://raw.githubusercontent.com/andreadhrt/acnh-tracker/master/images/arte/estatua_guerrera.jpg"
+  },
+  {
+    "id": 37,
+    "nombre": "Estatua majestuosa",
+    "tipo": "Escultura",
+    "obra_real": "David",
+    "autor": "Miguel Ángel",
+    "imagen": "https://raw.githubusercontent.com/andreadhrt/acnh-tracker/master/images/arte/estatua_majestuosa.jpg"
+  },
+  {
+    "id": 38,
+    "nombre": "Estatua pensativa",
+    "tipo": "Escultura",
+    "obra_real": "El pensador",
+    "autor": "Auguste Rodin",
+    "imagen": "https://raw.githubusercontent.com/andreadhrt/acnh-tracker/master/images/arte/estatua_pensativa.jpg"
+  },
+  {
+    "id": 39,
+    "nombre": "Estatua primitiva",
+    "tipo": "Escultura",
+    "obra_real": "Estatuilla dogu del periodo Jomon",
+    "autor": "Desconocido",
+    "imagen": "https://raw.githubusercontent.com/andreadhrt/acnh-tracker/master/images/arte/estatua_primitiva.jpg"
+  },
+  {
+    "id": 40,
+    "nombre": "Estatua triunfante",
+    "tipo": "Escultura",
+    "obra_real": "Rey Kamehameha I",
+    "autor": "Thomas Ridgeway Gould",
+    "imagen": "https://raw.githubusercontent.com/andreadhrt/acnh-tracker/master/images/arte/estatua_triunfante.jpg"
+  },
+  {
+    "id": 41,
+    "nombre": "Figura materna",
+    "tipo": "Escultura",
+    "obra_real": "Loba capitolina",
+    "autor": "Desconocido",
+    "imagen": "https://raw.githubusercontent.com/andreadhrt/acnh-tracker/master/images/arte/figura_materna.jpg"
+  },
+  {
+    "id": 42,
+    "nombre": "Piedra políglota",
+    "tipo": "Escultura",
+    "obra_real": "Piedra de Rosetta",
+    "autor": "Desconocido",
+    "imagen": "https://raw.githubusercontent.com/andreadhrt/acnh-tracker/master/images/arte/piedra_poliglota.jpg"
+  },
+  {
+    "id": 43,
+    "nombre": "Urna imponente",
+    "tipo": "Escultura",
+    "obra_real": "Houmuwu ding",
+    "autor": "Desconocido",
+    "imagen": "https://raw.githubusercontent.com/andreadhrt/acnh-tracker/master/images/arte/urna_imponente.jpg"
+  }
+]

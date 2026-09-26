@@ -6,6 +6,7 @@ import Constants from 'expo-constants';
 import pecesDatos from './src/data/peces.json';
 import bichosDatos from './src/data/bichos.json';
 import submarinaDatos from './src/data/submarina.json';
+import arteDatos from './src/data/arte.json';
 
 export default function App() {
   const [pestañaActual, setPestañaActual] = useState('peces');
@@ -14,6 +15,7 @@ export default function App() {
   const [peces, setPeces] = useState([]);
   const [bichos, setBichos] = useState([]);
   const [submarina, setSubmarina] = useState([]);
+  const [arte, setArte] = useState([]);
   const [cargando, setCargando] = useState(true);
   const [idExpandido, setIdExpandido] = useState(null);
 
@@ -28,11 +30,13 @@ export default function App() {
         const cPeces = await AsyncStorage.getItem('@tracker_peces_v4');
         const cBichos = await AsyncStorage.getItem('@tracker_bichos_v4');
         const cSub = await AsyncStorage.getItem('@tracker_submarina_v6');
+        const cArte = await AsyncStorage.getItem('@tracker_arte_v1');
         const cHemisferio = await AsyncStorage.getItem('@tracker_hemisferio');
 
         setPeces(cPeces ? JSON.parse(cPeces) : pecesDatos.map(p => ({ ...p, obtenido: false })));
         setBichos(cBichos ? JSON.parse(cBichos) : bichosDatos.map(b => ({ ...b, obtenido: false })));
         setSubmarina(cSub ? JSON.parse(cSub) : submarinaDatos.map(s => ({ ...s, obtenido: false })));
+        setArte(cArte ? JSON.parse(cArte) : arteDatos.map(a => ({ ...a, obtenido: false })));
         if (cHemisferio) setHemisferio(cHemisferio);
       } catch (e) { console.error(e); } finally { setCargando(false); }
     };
@@ -44,18 +48,26 @@ export default function App() {
       AsyncStorage.setItem('@tracker_peces_v4', JSON.stringify(peces));
       AsyncStorage.setItem('@tracker_bichos_v4', JSON.stringify(bichos));
       AsyncStorage.setItem('@tracker_submarina_v6', JSON.stringify(submarina));
+      AsyncStorage.setItem('@tracker_arte_v1', JSON.stringify(arte));
       AsyncStorage.setItem('@tracker_hemisferio', hemisferio);
     }
-  }, [peces, bichos, submarina, hemisferio]);
+  }, [peces, bichos, submarina, arte, hemisferio]);
 
   const toggleCaptura = (id) => {
     const setF = (prev) => prev.map(item => item.id === id ? { ...item, obtenido: !item.obtenido } : item);
     if (pestañaActual === 'peces') setPeces(setF);
     else if (pestañaActual === 'bichos') setBichos(setF);
-    else setSubmarina(setF);
+    else if (pestañaActual === 'submarina') setSubmarina(setF);
+    else setArte(setF);
   };
 
-  const listaActiva = pestañaActual === 'peces' ? peces : (pestañaActual === 'bichos' ? bichos : submarina);
+  const listaActiva = pestañaActual === 'peces'
+    ? peces
+    : pestañaActual === 'bichos'
+      ? bichos
+      : pestañaActual === 'submarina'
+        ? submarina
+        : arte;
 
   // 1. Calcular Progreso Dinámico
   const totalActivo = listaActiva.length;
@@ -64,6 +76,10 @@ export default function App() {
 
   // 2. Procesar Datos: Identificar última oportunidad, Filtrar y Ordenar
   const datosProcesados = listaActiva.map(item => {
+    if (pestañaActual === 'arte') {
+      return { ...item, enTemporada: true, seVa: false };
+    }
+
     const mesesDisponibles = hemisferio === 'norte' ? item.meses_norte : item.meses_sur;
     const enTemporada = mesesDisponibles.includes(mesActual);
     const seVa = enTemporada && !mesesDisponibles.includes(mesSiguiente);
@@ -93,14 +109,16 @@ export default function App() {
       <View style={styles.header}>
         <Text style={styles.headerTitle}>ACNH Tracker</Text>
 
-        <TouchableOpacity
-          style={styles.hemisphereBtn}
-          onPress={() => setHemisferio(hemisferio === 'norte' ? 'sur' : 'norte')}
-        >
-          <Text style={styles.hemisphereText}>
-            {hemisferio === 'norte' ? '🌍 Hemisferio: Norte' : '🌍 Hemisferio: Sur'}
-          </Text>
-        </TouchableOpacity>
+        {pestañaActual !== 'arte' && (
+          <TouchableOpacity
+            style={styles.hemisphereBtn}
+            onPress={() => setHemisferio(hemisferio === 'norte' ? 'sur' : 'norte')}
+          >
+            <Text style={styles.hemisphereText}>
+              {hemisferio === 'norte' ? '🌍 Hemisferio: Norte' : '🌍 Hemisferio: Sur'}
+            </Text>
+          </TouchableOpacity>
+        )}
 
         {/* Indicador de progreso del museo */}
         <View style={styles.progressContainer}>
@@ -171,7 +189,15 @@ export default function App() {
                     </View>
                   )}
 
-                  <Text style={styles.textoInfo}>📍 {item.ubicacion} • {item.horario} • {item.sombra}</Text>
+                  {pestañaActual === 'arte' ? (
+                    <Text style={styles.textoInfo}>
+                      🏛️ {item.obra_real} • {item.autor} ({item.tipo})
+                    </Text>
+                  ) : (
+                    <Text style={styles.textoInfo}>
+                      📍 {item.ubicacion} • {item.horario} • {item.sombra}
+                    </Text>
+                  )}
                 </View>
               )}
             </View>
@@ -183,6 +209,7 @@ export default function App() {
         <TouchableOpacity style={styles.footerTab} onPress={() => setPestañaActual('peces')}><Text>🐟 Peces</Text></TouchableOpacity>
         <TouchableOpacity style={styles.footerTab} onPress={() => setPestañaActual('bichos')}><Text>🦋 Bichos</Text></TouchableOpacity>
         <TouchableOpacity style={styles.footerTab} onPress={() => setPestañaActual('submarina')}><Text>🤿 Buceo</Text></TouchableOpacity>
+        <TouchableOpacity style={styles.footerTab} onPress={() => setPestañaActual('arte')}><Text>🏛️ Arte</Text></TouchableOpacity>
       </View>
     </SafeAreaView>
   );
